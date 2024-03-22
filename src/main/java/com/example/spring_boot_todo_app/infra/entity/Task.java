@@ -1,31 +1,36 @@
 package com.example.spring_boot_todo_app.infra.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tasks")
 public class Task {
     @Id
+    @Column(name = "task_id")
     private String taskId;
-    private String userId;
+
+    @ManyToOne()
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "status", nullable = false)
     private String status;
 
-    public Task() {
-    }
+    @Column(name = "deleted_at")
+    private java.sql.Timestamp deletedAt;
 
-    public Task(String taskId, String userId, String title, String description, String status) {
-        this.taskId = taskId;
-        this.userId = userId;
-        this.title = title;
-        this.description = description;
-        this.status = status;
-    }
-
-    // taskIdのgetterとsetter
+    // Getters and Setters
     public String getTaskId() {
         return taskId;
     }
@@ -34,16 +39,10 @@ public class Task {
         this.taskId = taskId;
     }
 
-    // userIdのgetterとsetter
-    public String getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    // titleのgetterとsetter
     public String getTitle() {
         return title;
     }
@@ -52,7 +51,6 @@ public class Task {
         this.title = title;
     }
 
-    // descriptionのgetterとsetter
     public String getDescription() {
         return description;
     }
@@ -61,12 +59,19 @@ public class Task {
         this.description = description;
     }
 
-    // statusのgetterとsetter
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public java.sql.Timestamp getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(java.sql.Timestamp deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

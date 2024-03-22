@@ -5,10 +5,9 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.spring_boot_todo_app.infra.entity.Task;
+import com.example.spring_boot_todo_app.infra.entity.User;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, String> {
-    public Optional<Task> findById(String id);
-
+public interface UserRepository extends JpaRepository<User, String> {
+    public Optional<User> findById(String id);
 }

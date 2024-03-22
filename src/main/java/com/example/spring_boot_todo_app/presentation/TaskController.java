@@ -27,6 +27,13 @@ public class TaskController {
         return tasks;
     }
 
+    @GetMapping("/tasks/{taskId}")
+    public Task getTask(@PathVariable String taskId) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
+        return task;
+    }
+
     @PostMapping("/tasks")
     public Task createTask(@RequestBody Task task) {
         return taskRepository.saveAndFlush(task);

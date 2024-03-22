@@ -1,10 +1,10 @@
 ```
 curl -X POST -H "Content-Type: application/json" -d '{
-    "taskId": "104",
-    "userId": "3",
-    "title": "新しいタスク",
-    "description": "新しいタスクの詳細",
-    "status": "NOT_STARTED"
+    "taskId": "unique-task-id",
+    "user": {"userId": "1"},
+    "title": "Task Title",
+    "description": "Task Description",
+    "status": "pending"
 }' http://localhost:8080/tasks
 ```
 
