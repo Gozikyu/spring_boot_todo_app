@@ -14,8 +14,7 @@ const storage = {
       JSON.stringify(userId)
     );
   },
-  clearTokenAndUserId: () => {
-    window.localStorage.removeItem(`${storagePrefix}token`);
+  clearUserId: () => {
     window.localStorage.removeItem(`${storagePrefix}userId`);
   },
 };
