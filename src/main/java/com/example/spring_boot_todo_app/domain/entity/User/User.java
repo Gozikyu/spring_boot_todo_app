@@ -1,7 +1,8 @@
-package com.example.spring_boot_todo_app.infra.entity;
+package com.example.spring_boot_todo_app.domain.entity.User;
 
 import java.util.List;
 
+import com.example.spring_boot_todo_app.domain.entity.task.Task;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -33,7 +34,6 @@ public class User {
     @Column(name = "deleted_at")
     private java.sql.Timestamp deletedAt;
 
-    // Getters and Setters
     public String getUserId() {
         return userId;
     }

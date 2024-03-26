@@ -5,14 +5,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_boot_todo_app.infra.entity.User;
-import com.example.spring_boot_todo_app.infra.repository.UserRepository;
+import com.example.spring_boot_todo_app.domain.entity.User.User;
+import com.example.spring_boot_todo_app.domain.entity.User.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 public class UserController {
-
     @Autowired
     UserRepository userRepository;
 
@@ -25,8 +31,38 @@ public class UserController {
     @GetMapping("/users/{userId}")
     public User getTask(@PathVariable String userId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
-
+                .orElseThrow(() -> new RuntimeException("対象が見つかりません。userId: " + userId));
         return user;
+    }
+
+    @PostMapping("/users")
+    public void createUser(@RequestBody User user) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String userJson = objectMapper.writeValueAsString(user);
+            System.out.println(userJson);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        userRepository.save(user);
+    }
+
+    @PutMapping("users/{userId}")
+    public void updateUser(@PathVariable String userId, @RequestBody User userDetails) {
+        userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("更新対象が見つかりません。userId: " + userId));
+
+        userDetails.setUserId(userId);
+        userRepository.update(userDetails);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public void deleteUser(@PathVariable String userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("削除対象が見つかりません。userId: " +
+                userId));
+
+        userRepository.delete(user);
     }
 }

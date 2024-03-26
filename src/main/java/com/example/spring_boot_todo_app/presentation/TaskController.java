@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_boot_todo_app.infra.entity.Task;
-import com.example.spring_boot_todo_app.infra.repository.TaskRepository;
+import com.example.spring_boot_todo_app.domain.entity.task.Task;
+import com.example.spring_boot_todo_app.domain.entity.task.TaskRepository;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class TaskController {
-
     @Autowired
     TaskRepository taskRepository;
 
@@ -30,33 +29,32 @@ public class TaskController {
     @GetMapping("/tasks/{taskId}")
     public Task getTask(@PathVariable String taskId) {
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
+                .orElseThrow(() -> new RuntimeException("対象が見つかりません。taskId: " +
+                        taskId));
         return task;
     }
 
     @PostMapping("/tasks")
-    public Task createTask(@RequestBody Task task) {
-        return taskRepository.saveAndFlush(task);
+    public void createTask(@RequestBody Task task) {
+        taskRepository.save(task);
     }
 
-    @PutMapping("/tasks/{taskId}")
-    public Task updateTask(@PathVariable String taskId, @RequestBody Task taskDetails) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
+    @PutMapping("/tasks/{userId}/{taskId}")
+    public void updateTask(@PathVariable String taskId, @RequestBody Task taskDetails) {
+        taskRepository.findById(taskId)
+                .orElseThrow(() -> new RuntimeException("更新対象が見つかりません。taskId: " +
+                        taskId));
 
-        task.setTitle(taskDetails.getTitle());
-        task.setDescription(taskDetails.getDescription());
-        task.setStatus(taskDetails.getStatus());
-
-        return taskRepository.saveAndFlush(task);
+        taskDetails.setTaskId(taskId);
+        taskRepository.update(taskDetails);
     }
 
     @DeleteMapping("/tasks/{taskId}")
-    public String deleteTask(@PathVariable String taskId) {
+    public void deleteTask(@PathVariable String taskId) {
         Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new RuntimeException("Task not found with id: " + taskId));
+                .orElseThrow(() -> new RuntimeException("削除対象が見つかりません。taskId: " +
+                        taskId));
 
         taskRepository.delete(task);
-        return "Task deleted successfully";
     }
 }
