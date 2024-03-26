@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { loginAndSetToken } from '../api/login';
+import { loginAndSetUserId } from '../api/login';
 import { useNavigate } from 'react-router-dom';
 import { TextField, Button, Container, Grid, Typography } from '@mui/material';
 
@@ -10,7 +10,7 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      await loginAndSetToken({ email, password });
+      await loginAndSetUserId({ email, password });
       alert('ログインに成功しました');
       navigate('/tasks');
     } catch (e) {

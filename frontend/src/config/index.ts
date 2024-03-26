@@ -1,3 +1,1 @@
-export const API_URL = import.meta.env.VITE_REACT_APP_AUTHENTICATED_API_URL;
-export const UNAUTHENTICATED_API_URL = import.meta.env
-  .VITE_REACT_APP_UNAUTHENTICATED_API_URL;
+export const API_URL = import.meta.env.VITE_REACT_APP_API_URL;

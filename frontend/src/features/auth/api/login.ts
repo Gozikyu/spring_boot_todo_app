@@ -1,4 +1,4 @@
-import { axiosForUnauthenticated } from '@/lib/axios';
+import { axios } from '@/lib/axios';
 import { LoginResponse, isLoginResponse } from '..';
 import storage from '@/util/storage';
 
@@ -10,7 +10,7 @@ export type LoginVariables = {
 const loginWithEmailAndPassword = async (
   data: LoginVariables
 ): Promise<LoginResponse> => {
-  const res = await axiosForUnauthenticated.post(`/login`, data);
+  const res = await axios.post(`/login`, data);
 
   if (!isLoginResponse(res)) {
     throw new Error('responseがLoginResponseの型ではありません');
@@ -18,8 +18,8 @@ const loginWithEmailAndPassword = async (
   return res;
 };
 
-export const loginAndSetToken = async (data: LoginVariables) => {
+export const loginAndSetUserId = async (data: LoginVariables) => {
   const response = await loginWithEmailAndPassword(data);
   const { userId } = response;
-  storage.setTokenAndUserId(userId);
+  storage.setUserId(userId);
 };

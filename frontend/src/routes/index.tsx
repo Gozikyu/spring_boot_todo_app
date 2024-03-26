@@ -5,10 +5,10 @@ import storage from '@/util/storage';
 import Landing from '@/features/misc/routes/Landing';
 
 export const AppRoutes = () => {
-  const token = storage.getToken(); //TODO: ログイン中のユーザーを保持する機能を入れる
+  const userId = storage.getUserId();
 
   const commonRoutes = [{ path: '/', element: <Landing /> }];
-  const routes = token ? protectedRoutes : publicRoutes;
+  const routes = userId ? protectedRoutes : publicRoutes;
 
   const elements = useRoutes([...routes, ...commonRoutes]);
 

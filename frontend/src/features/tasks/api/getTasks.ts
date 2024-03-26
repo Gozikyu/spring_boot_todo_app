@@ -1,11 +1,11 @@
 import { useQuery } from 'react-query';
 
-import { axios, axiosForUnauthenticated } from '@/lib/axios';
+import { axios } from '@/lib/axios';
 import { ExtractFnReturnType, QueryConfig } from '@/lib/react-query';
 import { Task } from '../types';
 
 const getTasks = (userId: string): Promise<Task[]> => {
-  return axiosForUnauthenticated.get(`/tasks`);
+  return axios.get(`/tasks`);
 };
 
 type QueryFnType = typeof getTasks;
