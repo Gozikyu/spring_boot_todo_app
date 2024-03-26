@@ -11,8 +11,9 @@ const storage = {
       window.localStorage.getItem(`${storagePrefix}userId`) as string
     );
   },
-  setTokenAndUserId: (token: string, userId: string) => {
-    window.localStorage.setItem(`${storagePrefix}token`, JSON.stringify(token));
+  //TODO: JWT認証をするようにしたい
+  setTokenAndUserId: (userId: string) => {
+    // window.localStorage.setItem(`${storagePrefix}token`, JSON.stringify(token));
     window.localStorage.setItem(
       `${storagePrefix}userId`,
       JSON.stringify(userId)

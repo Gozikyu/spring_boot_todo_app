@@ -8,6 +8,8 @@ public interface UserRepository {
 
     List<User> findAll();
 
+    Optional<User> findByEmailAndPassword(String email, String password);
+
     Optional<User> update(User user);
 
     void save(User user);

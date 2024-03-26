@@ -1,6 +1,6 @@
 export type Task = {
   taskId: string;
-  userId: string;
+  user: { userId: string };
   title: string;
   description: string;
   status: string;

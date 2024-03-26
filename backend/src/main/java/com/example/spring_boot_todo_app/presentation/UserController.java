@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spring_boot_todo_app.domain.entity.User.User;
 import com.example.spring_boot_todo_app.domain.entity.User.UserRepository;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
+@CrossOrigin
 public class UserController {
     @Autowired
     UserRepository userRepository;
@@ -37,15 +37,6 @@ public class UserController {
 
     @PostMapping("/users")
     public void createUser(@RequestBody User user) {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            String userJson = objectMapper.writeValueAsString(user);
-            System.out.println(userJson);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
-
         userRepository.save(user);
     }
 
