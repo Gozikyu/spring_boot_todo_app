@@ -3,8 +3,8 @@ import { useMutation } from 'react-query';
 import { queryClient } from '@/lib/react-query';
 
 export type UpdateTaskVariables = {
-  userId: string;
-  taskId: string;
+  userId: number;
+  taskId: number;
 };
 
 const deleteTask = ({ userId, taskId }: UpdateTaskVariables) => {

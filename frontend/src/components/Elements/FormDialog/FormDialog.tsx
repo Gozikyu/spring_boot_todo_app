@@ -44,7 +44,7 @@ export default function FormDialog(props: Props) {
   };
 
   const handleSubmit = () => {
-    taskMutation.mutate({ userId: '1', data: task }); //TODO: userIdを動的に設定する
+    taskMutation.mutate({ data: task });
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

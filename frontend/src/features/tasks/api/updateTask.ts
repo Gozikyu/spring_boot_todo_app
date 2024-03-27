@@ -4,11 +4,10 @@ import { ServerTask, Task } from '../types';
 import { queryClient } from '@/lib/react-query';
 
 export type UpdateTaskVariables = {
-  userId: string;
   data: Task;
 };
 
-const updateTask = ({ userId, data }: UpdateTaskVariables) => {
+const updateTask = ({ data }: UpdateTaskVariables) => {
   const serverTask: ServerTask = {
     taskId: data.taskId,
     user: {
@@ -18,7 +17,7 @@ const updateTask = ({ userId, data }: UpdateTaskVariables) => {
     description: data.description,
     status: data.status,
   };
-  return axios.put(`/${userId}/tasks/${data.taskId}`, serverTask);
+  return axios.put(`/${data.userId}/tasks/${data.taskId}`, serverTask);
 };
 
 export const useUpdateTask = () => {

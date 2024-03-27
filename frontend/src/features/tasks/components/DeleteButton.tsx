@@ -2,8 +2,8 @@ import { Button } from '@/components/Elements';
 import { useDeleteTask } from '../api/deleteTask';
 
 type Props = {
-  userId: string;
-  taskId: string;
+  userId: number;
+  taskId: number;
 };
 
 export const DeleteButton = (props: Props) => {

@@ -52,7 +52,7 @@ export const CreateDialog = (props: Props) => {
 
   const handleSubmit = () => {
     //TODO: 処理失敗時の挙動を追加する
-    taskMutation.mutate({ userId: props.userId, data: task });
+    taskMutation.mutate({ data: task });
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
