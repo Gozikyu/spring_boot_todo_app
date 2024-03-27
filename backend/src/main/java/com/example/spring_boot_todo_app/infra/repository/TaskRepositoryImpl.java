@@ -25,12 +25,19 @@ public class TaskRepositoryImpl implements TaskRepository {
 
     @Override
     public Optional<Task> findById(int id) {
-        return Optional.ofNullable(entityManager.find(Task.class, id));
+        Task task = entityManager.find(Task.class, id);
+        if (task != null && task.getDeletedAt() == null) {
+            return Optional.of(task);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public List<Task> findAll(int userId) {
-        return entityManager.createQuery("SELECT t FROM Task t WHERE t.user.userId = :userId", Task.class)
+        return entityManager
+                .createQuery("SELECT t FROM Task t WHERE t.user.userId = :userId AND t.deletedAt IS NULL",
+                        Task.class)
                 .setParameter("userId", userId).getResultList();
     }
 
