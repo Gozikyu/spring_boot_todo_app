@@ -22,37 +22,36 @@ public class TaskController {
     @Autowired
     TaskRepository taskRepository;
 
-    @GetMapping("/tasks")
-    public List<Task> getTasks() {
-        List<Task> tasks = taskRepository.findAll();
+    @GetMapping("/{userId}/tasks")
+    public List<Task> getTasks(@PathVariable int userId) {
+        List<Task> tasks = taskRepository.findAll(userId);
         return tasks;
     }
 
-    @GetMapping("/tasks/{taskId}")
-    public Task getTask(@PathVariable String taskId) {
+    @GetMapping("/{userId}/tasks/{taskId}")
+    public Task getTask(@PathVariable String userId, @PathVariable int taskId) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("対象が見つかりません。taskId: " +
                         taskId));
         return task;
     }
 
-    @PostMapping("/tasks")
+    @PostMapping("/{userId}/tasks")
     public void createTask(@RequestBody Task task) {
         taskRepository.save(task);
     }
 
-    @PutMapping("/tasks/{userId}/{taskId}")
-    public void updateTask(@PathVariable String taskId, @RequestBody Task taskDetails) {
-        taskRepository.findById(taskId)
+    @PutMapping("/{userId}/tasks/{taskId}")
+    public void updateTask(@RequestBody Task taskDetails) {
+        taskRepository.findById(taskDetails.getTaskId())
                 .orElseThrow(() -> new RuntimeException("更新対象が見つかりません。taskId: " +
-                        taskId));
+                        String.valueOf(taskDetails.getTaskId())));
 
-        taskDetails.setTaskId(taskId);
         taskRepository.update(taskDetails);
     }
 
-    @DeleteMapping("/tasks/{taskId}")
-    public void deleteTask(@PathVariable String taskId) {
+    @DeleteMapping("/{userId}/tasks/{taskId}")
+    public void deleteTask(@PathVariable int taskId) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new RuntimeException("削除対象が見つかりません。taskId: " +
                         taskId));

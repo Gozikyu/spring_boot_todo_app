@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public User getTask(@PathVariable String userId) {
+    public User getTask(@PathVariable int userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("対象が見つかりません。userId: " + userId));
         return user;
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @PutMapping("users/{userId}")
-    public void updateUser(@PathVariable String userId, @RequestBody User userDetails) {
+    public void updateUser(@PathVariable int userId, @RequestBody User userDetails) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("更新対象が見つかりません。userId: " + userId));
 
@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @DeleteMapping("/users/{userId}")
-    public void deleteUser(@PathVariable String userId) {
+    public void deleteUser(@PathVariable int userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("削除対象が見つかりません。userId: " +
                 userId));
 

@@ -21,7 +21,7 @@ public class UserRepositoryImpl implements UserRepository {
     private EntityManager entityManager;
 
     @Override
-    public Optional<User> findById(String id) {
+    public Optional<User> findById(int id) {
         return Optional.ofNullable(entityManager.find(User.class, id));
     }
 

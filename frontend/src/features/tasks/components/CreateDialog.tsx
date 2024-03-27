@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { MenuItem } from '@mui/material';
 import { useCreateTask } from '../api/createTask';
+import { NewTask } from '../types';
 
 //TODO: 一箇所で定義する
 const status = [
@@ -25,11 +26,11 @@ const status = [
 ];
 
 type Props = {
-  userId: string;
+  userId: number;
 };
 
 export const CreateDialog = (props: Props) => {
-  const initialNewTask = {
+  const initialNewTask: NewTask = {
     userId: props.userId,
     title: '',
     description: '',

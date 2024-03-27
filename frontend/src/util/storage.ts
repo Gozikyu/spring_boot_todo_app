@@ -1,13 +1,13 @@
 const storagePrefix = 'todo_app_';
 
 const storage = {
-  getUserId: (): string => {
-    return JSON.parse(
-      window.localStorage.getItem(`${storagePrefix}userId`) as string
-    );
+  getUserId: (): number => {
+    return window.localStorage.getItem(
+      `${storagePrefix}userId`
+    ) as unknown as number; // アサーションしないようにしたいが、自分で設定する値なので大丈夫なはず
   },
   //TODO: JWT認証をするようにしたい
-  setUserId: (userId: string) => {
+  setUserId: (userId: number) => {
     // window.localStorage.setItem(`${storagePrefix}token`, JSON.stringify(token));
     window.localStorage.setItem(
       `${storagePrefix}userId`,

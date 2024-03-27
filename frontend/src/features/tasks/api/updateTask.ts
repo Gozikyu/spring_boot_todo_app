@@ -1,6 +1,6 @@
 import { axios } from '@/lib/axios';
 import { useMutation } from 'react-query';
-import { Task } from '../types';
+import { ServerTask, Task } from '../types';
 import { queryClient } from '@/lib/react-query';
 
 export type UpdateTaskVariables = {
@@ -9,7 +9,16 @@ export type UpdateTaskVariables = {
 };
 
 const updateTask = ({ userId, data }: UpdateTaskVariables) => {
-  return axios.put(`/${userId}/tasks/${data.taskId}`, data);
+  const serverTask: ServerTask = {
+    taskId: data.taskId,
+    user: {
+      userId: data.userId,
+    },
+    title: data.title,
+    description: data.description,
+    status: data.status,
+  };
+  return axios.put(`/${userId}/tasks/${data.taskId}`, serverTask);
 };
 
 export const useUpdateTask = () => {

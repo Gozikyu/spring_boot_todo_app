@@ -1,13 +1,13 @@
 package com.example.spring_boot_todo_app.presentation.loginController;
 
 public class LoginResponse {
-    private String userId;
+    private int userId;
 
-    public LoginResponse(String userId) {
+    public LoginResponse(int userId) {
         this.userId = userId;
     }
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 }

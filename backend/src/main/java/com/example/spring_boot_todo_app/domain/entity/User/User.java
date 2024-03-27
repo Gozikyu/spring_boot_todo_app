@@ -16,7 +16,7 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @Column(name = "user_id")
-    private String userId;
+    private int userId;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -34,11 +34,11 @@ public class User {
     @Column(name = "deleted_at")
     private java.sql.Timestamp deletedAt;
 
-    public String getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 

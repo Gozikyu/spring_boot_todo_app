@@ -3,7 +3,7 @@ import { Task } from '../types';
 import { useTasks } from '../api/getTasks';
 
 type Props = {
-  userId: string;
+  userId: number;
 };
 
 export const TaskList = (props: Props) => {

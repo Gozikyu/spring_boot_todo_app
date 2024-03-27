@@ -24,13 +24,14 @@ public class TaskRepositoryImpl implements TaskRepository {
     private EntityManager entityManager;
 
     @Override
-    public Optional<Task> findById(String id) {
+    public Optional<Task> findById(int id) {
         return Optional.ofNullable(entityManager.find(Task.class, id));
     }
 
     @Override
-    public List<Task> findAll() {
-        return entityManager.createQuery("SELECT t FROM Task t", Task.class).getResultList();
+    public List<Task> findAll(int userId) {
+        return entityManager.createQuery("SELECT t FROM Task t WHERE t.user.userId = :userId", Task.class)
+                .setParameter("userId", userId).getResultList();
     }
 
     @Override

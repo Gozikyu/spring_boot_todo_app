@@ -28,7 +28,7 @@ public class LoginController {
         Optional<User> userOptional = userRepository.findByEmailAndPassword(email, password);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            String userId = user.getUserId();
+            int userId = user.getUserId();
 
             return new LoginResponse(userId);
         } else {

@@ -29,8 +29,6 @@ curl -X POST \
   -d '{"email":"ichiro@example.com","password":"password"}'
 ```
 
-_※ 以降の/restricted がついた API は JWT 認証が行われる_
-
 ### ユーザータスク取得 API
 
 #### 概要
@@ -39,12 +37,12 @@ _※ 以降の/restricted がついた API は JWT 認証が行われる_
 
 #### エンドポイント
 
-GET `/tasks`
+GET `/:userId/tasks`
 
 #### サンプルリクエスト
 
 ```bash
-curl http://localhost:8888/tasks
+curl http://localhost:8888/1/tasks
 ```
 
 ### ユーザータスク作成 API
@@ -55,18 +53,17 @@ curl http://localhost:8888/tasks
 
 #### エンドポイント
 
-POST `/tasks`
+POST `/:userId/tasks`
 
 #### サンプルリクエスト
 
 ```bash
 curl -X POST -H "Content-Type: application/json" -d '{
-    "taskId": "unique-task-id",
-    "user": {"userId": "1"},
+    "user": {"userId": 1},
     "title": "Task Title",
     "description": "Task Description",
     "status": "NOT_STARTED"
-}' http://localhost:8888/tasks
+}' http://localhost:8888/1/tasks
 ```
 
 ### ユーザータスク削除 API
@@ -77,12 +74,12 @@ curl -X POST -H "Content-Type: application/json" -d '{
 
 #### エンドポイント
 
-DELETE `/tasks/:taskId`
+DELETE `/:userId/tasks/:taskId`
 
 #### サンプルリクエスト
 
 ```bash
-curl -X DELETE http://localhost:8888/tasks/104
+curl -X DELETE http://localhost:8888/1/tasks/104
 ```
 
 ### ユーザータスク更新 API
@@ -93,7 +90,7 @@ curl -X DELETE http://localhost:8888/tasks/104
 
 #### エンドポイント
 
-PUT `/tasks/:taskId`
+PUT `/:userId/tasks/:taskId`
 
 #### サンプルリクエスト
 
@@ -103,7 +100,7 @@ curl -X PUT -H "Content-Type: application/json" -d '{
     "title": "更新されたタイトル",
     "description": "更新された詳細",
     "status": "IN_PROGRESS"
-}' http://localhost:8888/tasks/103
+}' http://localhost:8888/1/tasks/103
 ```
 
 ### 全ユーザー取得 API
