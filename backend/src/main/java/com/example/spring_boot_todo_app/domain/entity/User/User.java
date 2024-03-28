@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.spring_boot_todo_app.domain.entity.task.Task;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -16,6 +17,7 @@ import jakarta.persistence.Table;
 public class User {
     @Id
     @Column(name = "user_id")
+    @JsonProperty("id")
     private int userId;
 
     @Column(name = "name", nullable = false)

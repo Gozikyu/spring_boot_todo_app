@@ -3,6 +3,8 @@ package com.example.spring_boot_todo_app.presentation;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.spring_boot_todo_app.domain.entity.User.User;
@@ -23,9 +25,14 @@ public class UserController {
     UserRepository userRepository;
 
     @GetMapping("/users")
-    public List<User> getUsers() {
+    public ResponseEntity<List<User>> getUsers() {
         List<User> users = userRepository.findAll();
-        return users;
+        // X-Total-Count ヘッダーを含めたレスポンスを返す
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("X-Total-Count", String.valueOf(users.size()));
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(users);
     }
 
     @GetMapping("/users/{userId}")
