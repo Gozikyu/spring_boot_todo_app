@@ -43,17 +43,22 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public void createUser(@RequestBody User user) {
-        userRepository.save(user);
+    public User createUser(@RequestBody User user) {
+        User createdUser = userRepository.save(user);
+        return createdUser;
     }
 
     @PutMapping("users/{userId}")
-    public void updateUser(@PathVariable int userId, @RequestBody User userDetails) {
+    public User updateUser(@PathVariable int userId, @RequestBody User userDetails) {
         userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("更新対象が見つかりません。userId: " + userId));
 
         userDetails.setUserId(userId);
-        userRepository.update(userDetails);
+        // 2度存在チェックをしてしまっている
+        User updatedUser = userRepository.update(userDetails)
+                .orElseThrow(() -> new RuntimeException("更新対象が見つかりません。userId: " + userId));
+
+        return updatedUser;
     }
 
     @DeleteMapping("/users/{userId}")
