@@ -10,7 +10,7 @@ public interface TaskRepository {
 
     Optional<Task> update(Task task);
 
-    void save(Task task);
+    Task save(Task task);
 
     void delete(Task task);
 }

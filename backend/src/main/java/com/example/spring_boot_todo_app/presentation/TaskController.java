@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+//TODO: 全体的にリポジトリを直接呼び出してしまっているが、本来はservice層を定義しそれを呼び出すべき
 @RestController
 @CrossOrigin
 public class TaskController {

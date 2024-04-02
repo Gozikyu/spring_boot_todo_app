@@ -35,6 +35,16 @@ public class Task {
     @Column(name = "deleted_at")
     private java.sql.Timestamp deletedAt;
 
+    public Task() {
+    }
+
+    public Task(User user, String title, String description, String status) {
+        this.user = user;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+    }
+
     public int getTaskId() {
         return taskId;
     }

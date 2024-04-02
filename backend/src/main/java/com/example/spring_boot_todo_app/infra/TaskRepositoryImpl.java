@@ -1,4 +1,4 @@
-package com.example.spring_boot_todo_app.infra.repository;
+package com.example.spring_boot_todo_app.infra;
 
 import java.time.LocalDateTime;
 
@@ -45,8 +45,8 @@ public class TaskRepositoryImpl implements TaskRepository {
     public Optional<Task> update(Task task) {
         // 更新対象が存在するかどうかを確認
         Optional<Task> foundTask = Optional.ofNullable(entityManager.find(Task.class, task.getTaskId()));
-        if (foundTask == null) {
-            return null;
+        if (foundTask.isEmpty()) {
+            return Optional.empty();
         }
 
         // 更新対象が存在する場合はマージ
@@ -55,8 +55,11 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public void save(Task task) {
+    public Task save(Task task) {
         entityManager.persist(task);
+        Task savedTask = entityManager.find(Task.class, task.getTaskId());
+        return savedTask;
+
     }
 
     @Override

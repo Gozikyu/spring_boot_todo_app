@@ -39,6 +39,15 @@ public class User {
     @Column(name = "deleted_at")
     private java.sql.Timestamp deletedAt;
 
+    public User() {
+    };
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public int getUserId() {
         return userId;
     }

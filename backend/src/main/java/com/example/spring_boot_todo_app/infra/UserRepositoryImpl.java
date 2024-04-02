@@ -1,4 +1,4 @@
-package com.example.spring_boot_todo_app.infra.repository;
+package com.example.spring_boot_todo_app.infra;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -49,13 +49,15 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> update(User user) {
         // 更新対象が存在するかどうかを確認
         Optional<User> foundUser = Optional.ofNullable(entityManager.find(User.class, user.getUserId()));
-        if (foundUser == null) {
-            return null;
+        if (foundUser.isEmpty()) {
+            return Optional.empty();
         }
 
         // 更新対象が存在する場合はマージ
-        User mergedUser = entityManager.merge(user);
-        return Optional.ofNullable(mergedUser);
+        // User mergedUser = entityManager.merge(user);
+        // return Optional.ofNullable(mergedUser);
+
+        return foundUser;
     }
 
     @Override
