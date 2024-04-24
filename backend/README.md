@@ -197,3 +197,35 @@ curl -X PUT \
     "password": "password"
   }'
 ```
+
+### [補足、備忘録]環境構築　※JDK のインストールのみ
+
+1. mise のインストール
+
+   [公式サイト参照](https://github.com/jdx/mise)
+
+2. JDK のインストール
+
+   2.1 インストールできる version を確認
+
+   `mise ls-remote java`
+
+   2.2 インストール
+
+   `mise install java@openjdk-17.0.2`
+
+   2.3 設定
+
+   `mise use -g java@openjdk-17.0.2`
+
+3. 拡張機能インストール
+
+   - Spring Boot Extension Pack
+   - Extension Pack for Java
+   - Gradle for Java
+
+4. vscode に java の実行可能ファイルのパス設定
+
+   setting.json に下記を設定
+
+   `"java.jdt.ls.java.home": "実行可能ファイルパス(JAVA_HOMEに設定されているパス)"`
