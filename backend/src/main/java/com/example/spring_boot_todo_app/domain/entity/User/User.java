@@ -42,6 +42,13 @@ public class User {
     public User() {
     };
 
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
+    // TODO: テストでDBに採番をさせずに手動でuserIdを振る場合に使用する。プロダクトコードには不要なので無くすようにしたい。
     public User(int userId, String name, String email, String password) {
         this.userId = userId;
         this.name = name;
