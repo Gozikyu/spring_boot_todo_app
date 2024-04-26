@@ -34,7 +34,7 @@ class TaskRepositoryImplTest {
 
     @BeforeEach
     void setUp() {
-        User user = new User("テスト太郎", "test@example.com", "password");
+        User user = new User(1, "テスト太郎", "test@example.com", "password");
         this.savedUser = userRepository.save(user);
     }
 
